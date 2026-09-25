@@ -1,0 +1,42 @@
+Steps:
+1. Go to https://download.unity3d.com/download_unity/5f63fdee6d95/LinuxEditorInstaller/Unity-2022.3.60f1.tar.xz
+2. Find your Bopl folder and copy the contents of the files into your Bopl folder, as well as the Unity archive
+3. Run install.sh and it will patch the game
+4. Go to the gear icon in Steam > Properties > Advanced Launch Options and use: ./BoplBattle.x86_64 #%command%
+5. Play!
+
+This does not contain any assets from Bopl Battle; it only provides patches to a few DLLs that are open source.
+
+Online works;
+I wasted WAY too much time patching Facepunch.Steamworks.Win64.dll without realizing that Facepunch.Steamworks is open source and I can just download the Linux build and rename it to a Windows build.
+The version I found that works was Facepunch.Steamworks v2.3.2; also used libsteam_api.so which is also shipped with the DLL in the Unity folder. I had to rename this to libsteam_api64.so for some reason.
+
+Interestingly I needed something called libBCrypt.so too; Unity crashes without "BCryptGenRandom" from this library
+I """""learned""""" C and implemented it myself
+Source:
+#include <sys/random.h>
+#include <stddef.h>
+#include <stdint.h>
+
+int BCryptGenRandom(
+    void *_algorithm,
+    uint8_t *pbBuffer,
+    uint32_t cbBuffer,
+    uint32_t _flags)
+{
+    getrandom(pbBuffer,(size_t)cbBuffer,0);
+    return 0;
+}
+
+(The C purists might kill me for this one)
+(Actually they might not I don't know if they will)
+
+A MacOS build is definitely possible but I don't have a Mac to test, so...
+Maybe if someone asks I'll try my best!
+Credits:
+Facepunch Steamworks : https://github.com/Facepunch/Facepunch.Steamworks - MIT License
+Unify : https://github.com/0xf4b1/unify - MIT License
+And of course the developers of Bopl Battle for making a super awesome game!
+Licensed under MIT License.
+
+If you are the developer of Bopl Battle or represent Zapray Games and want this repository taken down, email me at wijeratnek12@gmail.com.
