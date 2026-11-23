@@ -1,6 +1,6 @@
 Steps:
 1. Go to https://download.unity3d.com/download_unity/5f63fdee6d95/LinuxEditorInstaller/Unity-2022.3.60f1.tar.xz
-2. Find your Bopl folder and copy the contents of the files into your Bopl folder, as well as the Unity archive
+2. Find your Bopl folder and copy the contents of the files of this repository into your Bopl folder, as well as the Unity archive
 3. Run install.sh and it will patch the game
 4. Go to the gear icon in Steam > Properties > Advanced Launch Options and use: ./BoplBattle.x86_64 #%command%
 5. Play!
